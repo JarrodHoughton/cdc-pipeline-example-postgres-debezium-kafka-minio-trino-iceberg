@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_DB: source_db
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: secret
+      POSTGRES_PASSWORD: password
     volumes:
       - ./db_init/init.sql:/docker-entrypoint-initdb.d/init.sql
   

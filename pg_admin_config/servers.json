@@ -5,7 +5,7 @@
             "Group": "Servers",
             "Port": 5432,
             "Username": "postgres",
-            "Password": "secret",
+            "Password": "password",
             "Host": "source_postgres",
             "SSLMode": "prefer",
             "MaintenanceDB": "postgres"
