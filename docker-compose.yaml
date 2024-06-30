@@ -10,6 +10,10 @@ services:
       POSTGRES_DB: source_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
+    command: # automatically set the wal_level to logical to get CDC from the transaction logs of the db
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
     volumes:
       - ./db_init/init.sql:/docker-entrypoint-initdb.d/init.sql
   
@@ -24,7 +28,7 @@ services:
       - PGADMIN_DEFAULT_EMAIL=admin@example.com
       - PGADMIN_DEFAULT_PASSWORD=password
     volumes:
-      - ./pg_admin_config/servers.json:/pgadmin4/servers.json
+      - ./pg_admin_config/servers.json:/pgadmin4/servers.json # automatically creates the server connection to the postgres db
     depends_on:
       - source_postgres
 
