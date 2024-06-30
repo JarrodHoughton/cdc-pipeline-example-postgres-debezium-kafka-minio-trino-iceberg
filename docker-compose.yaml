@@ -1,0 +1,34 @@
+services:
+  # setup postgres source database
+  source_postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    networks:
+      - cdc_network
+    environment:
+      POSTGRES_DB: source_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - ./db_init/init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  # setup pgadmin for easier management of db
+  pg_admin:
+    image: dpage/pgadmin4:latest
+    ports:
+      - "8000:80"
+    networks:
+      - cdc_network
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=password
+    volumes:
+      - ./pg_admin_config/servers.json:/pgadmin4/servers.json
+    depends_on:
+      - source_postgres
+
+
+networks:
+  cdc_network:
+    driver: bridge
