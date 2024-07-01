@@ -84,7 +84,31 @@ This step is to create the debezium connector for kafka which will read the tran
     -   Method: POST
     -   Body(JSON): The connector config above.
     -   Url: http://localhost:8083/connectors
-    
+
+    ### Here's a curl request:
+        curl --location 'http://localhost:8083/connectors' \
+        --header 'Content-Type: application/json' \
+        --data '{
+            "name": "source-db-connector",
+            "config": {
+                "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+            "database.hostname": "<your-host-ip>",
+                "database.port": "5432",
+                "database.user": "postgres",
+            "database.password": "password",
+                "database.dbname": "source_db",
+                "plugin.name": "pgoutput",
+                "database.server.name": "source_db",
+                "key.converter.schemas.enable": "false",
+                "value.converter.schemas.enable": "false",
+                "transforms": "unwrap",
+                "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+                "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+            "table.include.list": "public.users",
+                "slot.name" : "dbz_source_db_transactions_slot"
+            }
+        }'
 
 ## Jupyter Notebooks for Testing Kakfa and Inserting generated data into DB
 
