@@ -1,3 +1,4 @@
 # Environments
 .env
 .venv
+/jupyter-notebook-for-testing-kafka/.ipynb_checkpoints
