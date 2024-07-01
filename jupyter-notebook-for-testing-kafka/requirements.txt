@@ -1,3 +1,6 @@
 jupyter
 confluent-kafka
 faker
+SQLAlchemy
+psycopg2
+pandas
