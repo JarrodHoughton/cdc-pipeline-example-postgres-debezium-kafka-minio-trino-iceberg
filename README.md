@@ -116,7 +116,10 @@ This step is to create the debezium connector for kafka which will read the tran
     1. create a virtual env
         -   python -m venv .venv
     2. activate venv
-        -   source .venv/bin/activate (or windows: .venv/Scripts/activate)
+        - Linux
+            - source .venv/bin/activate
+        - Windows
+            -   source .venv/Scripts/activate
     3. install dependencies
         -   pip install -r jupyter-notebook-for-testing-kafka/requirements.txt
 
